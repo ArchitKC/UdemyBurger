@@ -4,7 +4,7 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../../Navigation/NavigationItems/NavigationItems';
 import classes from './SideDrawer.css';
 import BackDrop from '../../UI/Backdrop/Backdrop';
-import Aux from '../../../hoc/Auxilliary';
+import Aux from '../../../hoc/Auxiliary/Auxilliary';
 
 const functional = (props) =>{
     let attachedClasses = [classes.SideDrawer, classes.Close];
