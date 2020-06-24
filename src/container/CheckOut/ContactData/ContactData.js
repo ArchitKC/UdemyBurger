@@ -39,7 +39,7 @@ class ContactData extends Component {
             .then((response)=>{
                 console.log(response);
                 this.setState({loading:false})
-                this.props.history.push('/');
+                this.props.history.push('/orders');
             })
             .catch((error)=>{
                 console.log(error);

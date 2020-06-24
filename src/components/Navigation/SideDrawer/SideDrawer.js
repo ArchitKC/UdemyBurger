@@ -13,18 +13,17 @@ const functional = (props) =>{
     }
 
     return(
-        <Aux>
-            <BackDrop show={props.open} clicked={props.closed}></BackDrop>
-            <div className={attachedClasses.join(' ')}>
-            <div className={classes.Logo}>
-                <Logo></Logo>
-            </div>
-                <nav>
-                    <NavigationItems></NavigationItems>
-                </nav>
-            </div>
-
-        </Aux>
+            <Aux>
+                <BackDrop show={props.open} clicked={props.closed}></BackDrop>
+                <div className={attachedClasses.join(' ')}>
+                <div className={classes.Logo}>
+                    <Logo></Logo>
+                </div>
+                    <nav>
+                        <NavigationItems></NavigationItems>
+                    </nav>
+                </div>
+            </Aux>
     );
 
 };

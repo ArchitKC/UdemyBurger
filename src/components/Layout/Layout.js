@@ -22,16 +22,16 @@ class Layout extends Component{
     
     render(){
         return(
-    <Aux>
-        <Toolbar drawerToggleClicked={this.drawerToggleHandler}/>
-        <SideDrawer   
-            open={this.state.showSideDrawer}
-            closed={this.sideDrawerClosedHandler}
-             />
-        <main className={classes.MainContent}>
-            {this.props.children}
-        </main>
-    </Aux>
+                <Aux>
+                    <Toolbar drawerToggleClicked={this.drawerToggleHandler}/>
+                    <SideDrawer   
+                        open={this.state.showSideDrawer}
+                        closed={this.sideDrawerClosedHandler}
+                        />
+                    <main className={classes.MainContent}>
+                        {this.props.children}
+                    </main>
+                </Aux>
         )};
 };
 
