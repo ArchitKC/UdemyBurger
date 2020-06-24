@@ -32,7 +32,8 @@ class BurgerBuilder extends Component{
     }
 
     componentDidMount () {
-        axiosInstance.get( '/ingredients ' )
+        console.log(this.props)
+        axiosInstance.get( '/ingredients.json' )
             .then( response => {
                 this.setState( { ingredients: response.data } );
             } )
@@ -83,31 +84,21 @@ class BurgerBuilder extends Component{
     }
 
     purchaseContinueHandler=()=>{
-        this.setState({loading:true});
-        const order={
-            ingredients : this.state.ingredients,
-            price : this.state.totalPrice,
-            customer : {
-                name:'Archit',
-                address : {
-                    street: 'test123',
-                    zipCode : '12233',
-                    state: 'PA'
-                },
-                email : 'test@123.com'
-            },
-            delivery : 'express'
-        }        
-        //alert('Please Proceed');
-        axiosInstance.post('/orders.json',order)
-            .then((response)=>{
-                console.log(response);
-                this.setState({loading:false,ordering : false})
-            })
-            .catch((error)=>{
-                console.log(error);
-                this.setState({loading:false,ordering : false})
-            });
+        
+
+        const queryParams = [];
+        for (const item in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(item) + '=' + encodeURIComponent(this.state.ingredients[item]));
+        } 
+        
+        queryParams.push('totalPrice=' + this.state.totalPrice);
+        console.log(queryParams)
+        const queryString = queryParams.join('&'); 
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search : '?' + queryString
+        });
     }
 
     render(){     
@@ -119,9 +110,7 @@ class BurgerBuilder extends Component{
         }
 
         let orderSummary = null;
-        let burger = null;
-
-        
+        let burger = null; 
 
         burger = <Spinner></Spinner>
 
