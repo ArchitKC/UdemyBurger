@@ -9,7 +9,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import axiosInstance from '../../axios-order';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actionType from '../../store/action';
+import * as actionType from '../../store/actions/burgerBuilder';
 
  
 class BurgerBuilder extends Component{

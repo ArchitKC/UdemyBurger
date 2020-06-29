@@ -1,5 +1,5 @@
  
-import * as actionTypes from './action';
+import * as actionTypes from '../actions/burgerBuilder';
 
 const INGREDIENT_PRICES ={
     meat : 2.5,
