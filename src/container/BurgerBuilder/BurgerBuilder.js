@@ -119,7 +119,7 @@ class BurgerBuilder extends Component{
     }
 };
 
-const mapsStateToProps=state=>{
+const mapsStateToProps=(state)=>{
     return{
         ings: state.ingredients,
         price : state.totalPrice
@@ -133,5 +133,4 @@ const mapsDispatchToProps=dispatch=>{
     };
 }
 
-export default connect(mapsStateToProps,mapsDispatchToProps)
-                        (withErrorHandler(BurgerBuilder,axiosInstance));
+export default connect(mapsStateToProps,mapsDispatchToProps)(withErrorHandler(BurgerBuilder,axiosInstance));

@@ -10,6 +10,6 @@ export const addIngredient = (name) =>{
 export const removeIngredient = (name) =>{
     return{
         type : actionTypes.remove_ingredient,
-        ingredientName : name
+        ingredientsName : name
     }
 }
