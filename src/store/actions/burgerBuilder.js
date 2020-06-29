@@ -2,14 +2,14 @@ import * as actionTypes from './actionTypes';
 
 export const addIngredient = (name) =>{
     return{
-        type : actionTypes.ADD_INGREDIENT,
+        type : actionTypes.add_ingredient,
         ingredientName : name
     }
 }
 
 export const removeIngredient = (name) =>{
     return{
-        type : actionTypes.REMOVE_INGREDIENT,
+        type : actionTypes.remove_ingredient,
         ingredientName : name
     }
 }

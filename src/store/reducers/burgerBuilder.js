@@ -20,7 +20,7 @@ const initialState ={
 
 const reducer=(state=initialState,action)=>{
     switch(action.type){
-        case actionTypes.ADD_INGREDIENT :{
+        case actionTypes.add_ingredient :{
             return{ 
                 ...state,
                 ingredients :{
@@ -30,7 +30,7 @@ const reducer=(state=initialState,action)=>{
                 totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
             };
         }
-        case actionTypes.REMOVE_INGREDIENT :{
+        case actionTypes.remove_ingredient :{
             return{
                 ...state,
                 ingredients :{
