@@ -1,5 +1,6 @@
  
 import * as actionTypes from '../actions/actionTypes';
+import {updateObject} from './../utility';
 
 const INGREDIENT_PRICES ={
     meat : 2.5,
@@ -17,14 +18,11 @@ const initialState ={
 const reducer=(state=initialState,action)=>{
     switch(action.type){
         case actionTypes.add_ingredient :{
-            return{ 
-                ...state,
-                ingredients :{
-                    ...state.ingredients,
-                    [action.ingredientName] : state.ingredients[action.ingredientName] + 1,
-                },
-                totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-            };
+            const updatedIngredient = {[action.ingredientName] : state.ingredients[action.ingredientName] + 1};
+            const updatedIngredients = updateObject(state.ingredients,updatedIngredient);  
+            const newState = { ingredients : updatedIngredients,
+                totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]}
+            return updateObject(state,newState);
         }
         case actionTypes.remove_ingredient :{
             return{
@@ -37,18 +35,15 @@ const reducer=(state=initialState,action)=>{
             };
         }
         case actionTypes.set_ingredients:{
-            return{
-                ...state,
-                ingredients : action.ingredients,
-                totalPrice : 4,
-                error : false
-            };
+            return updateObject(state,{ingredients : 
+                                            action.ingredients,
+                                            totalPrice : 4,
+                                            error : false
+                                        }
+                                ); 
         }
         case actionTypes.fetchingredient_error : {
-            return {
-                ...state,
-                error : true
-            };
+            return updateObject(state,{error : true});
         }
         default:
             return state;    
