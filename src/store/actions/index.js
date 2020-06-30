@@ -6,5 +6,7 @@ export {
 } from './burgerBuilder.js';
 
 export {
-    purchaseOrderSuccess 
+    getPurchaseOrder,
+    purchaseinit,
+    getOrders
 } from './order.js';

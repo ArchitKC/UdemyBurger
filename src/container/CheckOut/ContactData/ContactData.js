@@ -155,11 +155,9 @@ class ContactData extends Component {
         updatedOrderForm[inputIdentifier] = updatedOrderValue; 
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm) {
-            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
-            console.log(formIsValid);
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid; 
         }
-        this.setState({orderForm : updatedOrderForm, isValid : formIsValid});
-        console.log(updatedOrderForm);
+        this.setState({orderForm : updatedOrderForm, isValid : formIsValid}); 
     }
 
     render(){
@@ -212,8 +210,7 @@ const mapsStateToProps=state=>{
 
 const mapsDispatchToProps = dispatch=>{
     return{
-        onPurchaseOrder : (orderData)=>dispatch(contactDataActionType.purchaseOrderSuccess(orderData)),
-
+        onPurchaseOrder : (orderData)=>dispatch(contactDataActionType.getPurchaseOrder(orderData)),
     };
 }
 

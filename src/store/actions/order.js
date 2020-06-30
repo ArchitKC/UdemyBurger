@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axiosInstance from '../../axios-order';
 
 
-export const getPurchaseOrder = (id,orderData)=>{
+export const purchaseOrderSuccess = (id,orderData)=>{
     return{
         type : actionTypes.purchase_order_success,
         Orderid : id,
@@ -24,15 +24,67 @@ export const purchaseOrderStart=()=>{
 }
 
 
-export const purchaseOrderSuccess = (orderData)=>{
+export const getPurchaseOrder = (orderData)=>{
     return dispatch=>{  
         dispatch(purchaseOrderStart());
         axiosInstance.post('/orders.json',orderData)
             .then((response)=>{ 
-                dispatch(getPurchaseOrder(response.data.name,orderData))
+                dispatch(purchaseOrderSuccess(response.data.name,orderData))
             })
             .catch((error)=>{ 
                 dispatch(actionTypes.purchase_order_fail(error))
             });
     };
+}
+
+export const purchaseinit=()=>{
+    return{
+        type: actionTypes.purchase_init
+    }
+}
+
+export const fetchOrderfail =(error)=>{
+    return{
+        type : actionTypes.fetch_order_fail,
+        error: error
+    }
+}
+
+export const fetchOrderStart =()=>{
+    return{
+        type : actionTypes.fetch_order_start
+    }
+}
+
+export const fetchOrderSuccess = (orders)=>{
+    return{
+        type : actionTypes.fetch_order_success,
+        orders : orders
+    }
+} 
+
+export const getOrders = ()=>{
+    return dispatch =>{
+        dispatch(fetchOrderStart());
+        const fetchedOrder =[];
+        axiosInstance.get('/orders.json')
+        .then((response)=>{ 
+            for (const key in response.data) {
+                fetchedOrder.push({ 
+                    ...response.data[key],
+                    id: key
+                });
+            }
+            dispatch(fetchOrderSuccess(fetchedOrder)); 
+        })
+        .catch(err=>{
+            dispatch(fetchOrderfail());
+        });
+    }
+}
+
+export const fetchOrderInit = ()=>{
+    return{
+        type : actionTypes.fetch_order_init
+    }
 }
