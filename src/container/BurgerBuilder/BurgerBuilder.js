@@ -20,9 +20,7 @@ class BurgerBuilder extends Component{
     }
 
     componentDidMount () {
-        this.props.onInitIngredients();
-        //console.log(this.props)
-        // 
+        this.props.onInitIngredients(); 
         // axiosInstance.get('/ingredientsPrice.json')
         // .then((repsonse)=>{
         //     console.log(repsonse.data);

@@ -6,6 +6,8 @@ import classes from './ContactData.css';
 import axiosInstance from '../../../axios-order';
 import Spinner from '../../../components/UI/Spinner/Spinner'; 
 import Input from '../../../components/UI/Input/Input';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import * as contactDataActionType from '../../../store/actions/index';
 
 class ContactData extends Component {
     state={
@@ -92,14 +94,11 @@ class ContactData extends Component {
                 valid: true
             }
         },
-        formIsValid: false,
-        loading : false
+        formIsValid: false 
     }
 
     orderHandler=(event)=>{
-        event.preventDefault(); 
-        console.log(this.props.ingredients)
-        this.setState({loading:true});
+        event.preventDefault();  
         const formDataValue ={};
 
         for (let formValueIdentifier in this.state.orderForm){
@@ -110,17 +109,8 @@ class ContactData extends Component {
             ingredients : this.props.ings,
             price : this.props.price,
             orderForm : formDataValue           
-        }         
-        axiosInstance.post('/orders.json',order)
-            .then((response)=>{
-                console.log(response);
-                this.setState({loading:false})
-                this.props.history.push('/orders');
-            })
-            .catch((error)=>{
-                console.log(error);
-                this.setState({loading:false})
-            });
+        }                  
+        this.props.onPurchaseOrder(order);
     }
     checkValidity(value, rules) {
         let isValid = true;
@@ -199,7 +189,7 @@ class ContactData extends Component {
                         <Button btntype="Success" disabled={this.state.formIsValid} >Order Now</Button> 
                     </div>
                 </form>);
-        if(this.state.loading){
+        if(this.props.loading){
             form = <Spinner/>;
         }
         return(
@@ -215,8 +205,16 @@ class ContactData extends Component {
 const mapsStateToProps=state=>{
     return{
         ings: state.ingredients,
-        price : state.totalPrice
+        price : state.totalPrice,
+        loading : state.loading
     };
 }
 
-export default connect(mapsStateToProps)(ContactData);
+const mapsDispatchToProps = dispatch=>{
+    return{
+        onPurchaseOrder : (orderData)=>dispatch(contactDataActionType.purchaseOrderSuccess(orderData)),
+
+    };
+}
+
+export default connect(mapsStateToProps,mapsDispatchToProps)(withErrorHandler(ContactData,axiosInstance));

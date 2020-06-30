@@ -4,3 +4,7 @@ export {
     setIngredients 
      
 } from './burgerBuilder.js';
+
+export {
+    purchaseOrderSuccess 
+} from './order.js';
