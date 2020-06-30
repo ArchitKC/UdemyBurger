@@ -29,7 +29,7 @@ export const purchaseOrderSuccess = (orderData)=>{
         dispatch(purchaseOrderStart());
         axiosInstance.post('/orders.json',orderData)
             .then((response)=>{ 
-                dispatch(getPurchaseOrder(response.data,orderData))
+                dispatch(getPurchaseOrder(response.data.name,orderData))
             })
             .catch((error)=>{ 
                 dispatch(actionTypes.purchase_order_fail(error))
