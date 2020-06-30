@@ -9,8 +9,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import axiosInstance from '../../axios-order';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actionType from '../../store/actions/index';
-import burgerIngredient from '../../components/Burger/BurgerIngredients/BurgerIngredient';
+import * as actionType from '../../store/actions/index'; 
 
  
 class BurgerBuilder extends Component{
@@ -18,18 +17,12 @@ class BurgerBuilder extends Component{
     state={  
         purchasable: false,
         ordering : false,
-        loading : false
     }
 
     componentDidMount () {
+        this.props.onInitIngredients();
         //console.log(this.props)
-        // axiosInstance.get( '/ingredients.json' )
-        //     .then( response => {
-        //         this.setState( { ingredients: response.data } );
-        //     } )
-        //     .catch( error => {
-        //         this.setState( { error: true } );
-        //     });
+        // 
         // axiosInstance.get('/ingredientsPrice.json')
         // .then((repsonse)=>{
         //     console.log(repsonse.data);
@@ -72,8 +65,8 @@ class BurgerBuilder extends Component{
             disabledInfo[key] = disabledInfo[key] <= 0
         }
 
-        let orderSummary = null;
-        let burger = null; 
+        let orderSummary = null;        
+        let burger = this.props.error ? <p>Ingredients can't be loaded!</p> : <Spinner />;
 
         burger = <Spinner></Spinner>
 
@@ -99,12 +92,7 @@ class BurgerBuilder extends Component{
                             orderContinue={this.purchaseContinueHandler}
                         ></OrderSummary>  
         }
-
-        if(this.state.loading){
-            orderSummary = <Spinner></Spinner>
-        }
-
-
+ 
         return(
             <Aux>
                 <Modal
@@ -122,14 +110,16 @@ class BurgerBuilder extends Component{
 const mapsStateToProps=(state)=>{
     return{
         ings: state.ingredients,
-        price : state.totalPrice
+        price : state.totalPrice, 
+        error : state.error
     };
 }
 
 const mapsDispatchToProps=dispatch=>{
     return{ 
         onAddIngredients : (ingName)=>dispatch(actionType.addIngredient(ingName)),
-        onRemoveIngredients: (ingName) => dispatch(actionType.removeIngredient(ingName)) 
+        onRemoveIngredients: (ingName) => dispatch(actionType.removeIngredient(ingName)),
+        onInitIngredients : ()=>dispatch(actionType.setIngredients())
     };
 }
 
