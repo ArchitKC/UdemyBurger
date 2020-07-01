@@ -10,3 +10,7 @@ export {
     purchaseinit,
     getOrders
 } from './order.js';
+
+export {
+    authenticating
+}from './auth.js'

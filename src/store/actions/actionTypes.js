@@ -12,3 +12,7 @@ export const fetch_order_start = 'FETCH_ORDER_START';
 export const fetch_order_success = 'FETCH_ORDER_SUCCESS';
 export const fetch_order_fail = 'FETCH_ORDER_FAIL';
 export const fetch_order_init = 'FETCH_ORDER_INIT';
+
+export const auth_start = 'AUTH_START';
+export const auth_success = 'AUTH_SUCCESS';
+export const auth_fail = 'AUTH_FAIL';
