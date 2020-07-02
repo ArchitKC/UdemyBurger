@@ -37,9 +37,38 @@ export const authenticating = (email,password,isSign)=>{
         .then((response)=>{
             console.log (response);
             dispatch(authSuccess(response.data.idToken, response.data.localId));
+            let expireTime = null;
+            if(response.data.expiresIn === undefined){
+                expireTime = 3600;
+            }else {
+                expireTime = response.data.expiresIn
+            }
+            dispatch(checkTimeOut(expireTime));
         })
         .catch((error)=>{
             dispatch(authFail(error));
         })
+    }
+}
+
+export const authLogout = ()=>{
+    return {
+        type : actionType.auth_logout
+    }
+}
+
+export const checkTimeOut = (expirationTime)=>{
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(authLogout());
+        }, expirationTime * 1000);
+    };
+}
+
+
+export const setAuthRedirectPath =(path)=>{
+    return{
+        type : actionType.set_auth_redirect_path,
+        path : path
     }
 }

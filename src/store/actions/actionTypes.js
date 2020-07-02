@@ -16,3 +16,6 @@ export const fetch_order_init = 'FETCH_ORDER_INIT';
 export const auth_start = 'AUTH_START';
 export const auth_success = 'AUTH_SUCCESS';
 export const auth_fail = 'AUTH_FAIL';
+export const auth_logout = 'AUTH_LOG_OUT';
+
+export const set_auth_redirect_path = 'SET_AUTH_REDIRECT_PATH';

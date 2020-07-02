@@ -3,7 +3,8 @@ import {updateObject} from './../utility';
 const initialState ={
     orders: [],
     purchased : false,
-    loading : false
+    loading : false,
+    error : null
 }
 
 const reducer = (state=initialState,action)=>{ 

@@ -32,7 +32,7 @@ export const getPurchaseOrder = (orderData)=>{
                 dispatch(purchaseOrderSuccess(response.data.name,orderData))
             })
             .catch((error)=>{ 
-                dispatch(actionTypes.purchase_order_fail(error))
+                dispatch(purchaseOrderFail(error))
             });
     };
 }
@@ -63,11 +63,12 @@ export const fetchOrderSuccess = (orders)=>{
     }
 } 
 
-export const getOrders = ()=>{
+export const getOrders = (token)=>{
     return dispatch =>{
         dispatch(fetchOrderStart());
         const fetchedOrder =[];
-        axiosInstance.get('/orders.json')
+        axiosInstance.get('/orders.json?auth=' +token)
+        
         .then((response)=>{ 
             for (const key in response.data) {
                 fetchedOrder.push({ 
@@ -77,8 +78,8 @@ export const getOrders = ()=>{
             }
             dispatch(fetchOrderSuccess(fetchedOrder)); 
         })
-        .catch(err=>{
-            dispatch(fetchOrderfail());
+        .catch((error)=>{ 
+            dispatch(fetchOrderfail(error))
         });
     }
 }
