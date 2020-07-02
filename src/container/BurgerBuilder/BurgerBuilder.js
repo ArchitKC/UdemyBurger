@@ -23,7 +23,6 @@ class BurgerBuilder extends Component{
         this.props.onInitIngredients(); 
         // axiosInstance.get('/ingredientsPrice.json')
         // .then((repsonse)=>{
-        //     console.log(repsonse.data);
         //     // eslint-disable-next-line no-const-assign
         //     INGREDIENT_PRICES = repsonse.data;
         // })

@@ -9,9 +9,7 @@ export default functional;*/
 class Functional extends Component{
     render(){
         return(
-            <div>
-                console.log('Hello');
-            </div>
+            <div></div>
         )};
 
 };

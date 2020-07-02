@@ -15,7 +15,7 @@ const functional = (props) =>{
     return(
             <Aux>
                 <BackDrop show={props.open} clicked={props.closed}></BackDrop>
-                <div className={attachedClasses.join(' ')}>
+                <div className={attachedClasses.join(' ')} onClick={props.closed}>
                 <div className={classes.Logo}>
                     <Logo></Logo>
                 </div>

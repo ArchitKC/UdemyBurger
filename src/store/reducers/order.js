@@ -1,5 +1,6 @@
 import * as actionType from '../actions/actionTypes'; 
-import {updateObject} from './../utility';
+import {updateObject} from '../../shared/utility'; 
+
 const initialState ={
     orders: [],
     purchased : false,
@@ -28,7 +29,7 @@ const reducer = (state=initialState,action)=>{
                 return updateObject(state,{loading : false}) 
             }
             case actionType.fetch_order_start : {
-                return updateObject(state,{loading : true}) 
+                return updateObject(state,{loading : false}) 
             }
             case actionType.fetch_order_success:{
                 return updateObject(state,{orders : action.orders,loading : false})                 

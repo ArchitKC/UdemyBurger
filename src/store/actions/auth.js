@@ -35,7 +35,6 @@ export const authenticating = (email,password,isSign)=>{
         }
         axiosInstance.post(signUrl,authData)
         .then((response)=>{
-            console.log (response);
             let expireTime = null;
             if(response.data.expiresIn === undefined){
                 expireTime = 3600;

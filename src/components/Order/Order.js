@@ -12,8 +12,7 @@ const order = ( props ) => {
             amount : props.ingredients[key]
         });
         
-    }
-    console.log(ingredient);
+    } 
 
     const outputingredient= ingredient.map(item=>{
         return <span key={item.name}

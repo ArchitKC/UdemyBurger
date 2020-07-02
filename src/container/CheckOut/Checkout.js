@@ -11,7 +11,6 @@ class Checkout extends Component {
     }
 
     continueOrder=()=>{
-        console.log(this.props)
         this.props.history.push('/checkout/purchase-contact');
     }
 
