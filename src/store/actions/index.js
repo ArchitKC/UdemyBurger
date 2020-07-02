@@ -6,7 +6,7 @@ export {
 } from './burgerBuilder.js';
 
 export {
-    getPurchaseOrder,
+    purchaseBurger,
     purchaseinit,
     getOrders
 } from './order.js';
@@ -14,5 +14,6 @@ export {
 export {
     authenticating,
     authLogout,
-    setAuthRedirectPath
+    setAuthRedirectPath,
+    authCheckState
 }from './auth.js'
