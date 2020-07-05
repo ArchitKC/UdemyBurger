@@ -1,40 +1,43 @@
-import React, { Component } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import Modal from '../../components/UI/Modal/Modal';
 import Aux from '../Auxiliary/Auxilliary';
 
 const withErrorHandler = ( WrappedComponent, axios ) => {
-    return class extends Component {
-        state = {
-            error: null
-        }
+    return props=> {
+        const [error,setError] = useState(null); 
 
-        componentWillMount () {
-            axios.interceptors.request.use(req => {
-                this.setState({error: null});
-                return req;
-            });
-            axios.interceptors.response.use(res => res, error => {
-                this.setState({error: error});
-            });
-        }
+         
+    const reqInterceptors = axios.interceptors.request.use(req => {
+        setError(null);
+        return req;
+    });
+    const resInterceptors = axios.interceptors.response.use(res => res, err => {
+        setError(err);
+    }); 
 
-        errorConfirmedHandler = () => {
-            this.setState({error: null});
-        }
+    useEffect(()=>{
+        return ()=>{
+            axios.interceptors.request.eject(reqInterceptors);
+            axios.interceptors.response.eject(resInterceptors);
+        };
+    },[reqInterceptors,resInterceptors]);
 
-        render () {
+    const errorConfirmedHandler = () => {
+        setError(null);
+    }
+ 
             return (
                 <Aux>
                     <Modal 
-                        display={this.state.error}
-                        modalClosed={this.errorConfirmedHandler}>
-                        {this.state.error ? this.state.error.message : null}
+                        display={error}
+                        modalClosed={errorConfirmedHandler}>
+                        {error ? error.message : null}
                     </Modal>
-                    <WrappedComponent {...this.props} />
+                    <WrappedComponent {...props} />
                 </Aux>
             );
-        }
+         
     }
 }
 

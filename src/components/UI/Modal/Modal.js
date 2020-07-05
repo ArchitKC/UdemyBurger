@@ -22,4 +22,9 @@ const modal = (props) =>(
     </Aux>
 ); 
 
-export default modal;
+export default React.memo(
+    modal,
+    (prevProps, nextProps) =>
+      nextProps.display === prevProps.display &&
+      nextProps.children === prevProps.children
+  );
